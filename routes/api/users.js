@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
-const bcrpyt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 //Pull User Model
 const User = require('../../models/User');
@@ -26,7 +26,7 @@ router.post('/register', (req, res) => {
       });
       const newUser = new User({
         name: req.body.name,
-        email: res.body.email,
+        email: req.body.email,
         avatar,
         password: req.body.password,
       });
@@ -41,6 +41,30 @@ router.post('/register', (req, res) => {
         });
       });
     }
+  });
+});
+
+//Return Token
+//Public
+
+router.post('/login', (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  //Find User email
+  User.findOne({email}).then(user => {
+    //Check user
+    if (!user) {
+      return res.status(404).json({email: 'User email not found'});
+    }
+    //Check password
+    bcrypt.compare(password, user.password).then(isMatch => {
+      if (isMatch) {
+        res.json({msg: 'Success'});
+      } else {
+        return res.status(400).json({password: 'Password incorrect'});
+      }
+    });
   });
 });
 
