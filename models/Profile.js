@@ -32,4 +32,40 @@ const ProfileSchema = new Schema({
   bio: {
     type: String,
   },
+  education: [
+    {
+      school: {
+        type: String,
+      },
+      from: {
+        type: Date,
+      },
+      to: {
+        type: Date,
+      },
+    },
+  ],
+  social: {
+    youtube: {
+      type: String,
+    },
+    twitter: {
+      type: String,
+    },
+    facebook: {
+      type: String,
+    },
+    instagram: {
+      type: String,
+    },
+    linkedin: {
+      type: String,
+    },
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
+
+module.exports = Profile = mongoose.model('profile', ProfileSchema);
