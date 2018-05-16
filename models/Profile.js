@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//Create Schema
 const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
@@ -23,25 +22,74 @@ const ProfileSchema = new Schema({
   },
   status: {
     type: String,
-    // required: true,
+    required: true,
   },
   skills: {
     type: [String],
-    // required: true,
+    required: true,
   },
   bio: {
     type: String,
   },
-  education: [
+  githubusername: {
+    type: String,
+  },
+  experience: [
     {
-      school: {
+      title: {
+        type: String,
+        required: true,
+      },
+      company: {
+        type: String,
+        required: true,
+      },
+      location: {
         type: String,
       },
       from: {
         type: Date,
+        required: true,
       },
       to: {
         type: Date,
+      },
+      current: {
+        type: Boolean,
+        default: false,
+      },
+      description: {
+        type: String,
+      },
+    },
+  ],
+  education: [
+    {
+      school: {
+        type: String,
+        required: true,
+      },
+      degree: {
+        type: String,
+        required: true,
+      },
+      fieldofstudy: {
+        type: String,
+        required: true,
+      },
+      from: {
+        type: Date,
+        required: true,
+      },
+      to: {
+        type: Date,
+      },
+      current: {
+        type: Boolean,
+        default: false,
+      },
+      description: {
+        type: String,
       },
     },
   ],
@@ -55,10 +103,10 @@ const ProfileSchema = new Schema({
     facebook: {
       type: String,
     },
-    instagram: {
+    linkedin: {
       type: String,
     },
-    linkedin: {
+    instagram: {
       type: String,
     },
   },
